@@ -1,0 +1,239 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+/* HEADER */
+.header {
+    background-color: #1f2d3d;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    height: 40px;
+}
+
+.logo-text h1 {
+    font-size: 20px;
+}
+
+.logo-text span {
+    font-size: 12px;
+    color: #ccc;
+}
+
+.user-area a {
+    color: #00c8ff;
+    text-decoration: none;
+}
+
+/* CONTAINER PRINCIPAL */
+.main-container {
+    display: flex;
+    min-height: calc(100vh - 120px);
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background-color: #273849;
+    padding-top: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: 5px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.sidebar a:hover {
+    background-color: #1f2d3d;
+}
+
+/* CONTEÚDO */
+.content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* RODAPÉ */
+.footer {
+    background-color: #1f2d3d;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+}
+
+/* PRODUTOS EM PROMOÇÃO */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.product-card h3 {
+    margin-bottom: 10px;
+}
+
+.product-card p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.product-card button {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.product-card button:hover {
+    background-color: #218838;
+}
+
+/* FORMULÁRIOS (para uso futuro) */
+form {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    max-width: 600px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.tabela th,
+.tabela td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.tabela th {
+    background-color: #f4f4f4;
+}
+
+.tabela tr:hover {
+    background: #f9f9f9;
+}
+
+form button:hover {
+    background-color: #0069d9;
+}
+
+/* BOTÕES PADRÃO */
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background-color: #0069d9;
+}
+
+/* BOTÃO PEQUENO (ações da tabela) */
+.btn-small {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 13px;
+    margin-right: 5px;
+    transition: background 0.2s;
+}
+
+.btn-small:hover {
+    background-color: #0069d9;
+}
+
+/* BOTÃO DE PERIGO */
+.btn.danger,
+.btn-small.danger {
+    background-color: #dc3545;
+}
+
+.btn.danger:hover,
+.btn-small.danger:hover {
+    background-color: #b02a37;
+}

@@ -1,0 +1,133 @@
+    <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Venda</title>
+</head>
+<body>
+
+    <div th:fragment="conteudo">
+<h2>Nova Venda</h2>
+
+<form th:action="@{/vendas/salvar}" th:object="${venda}" method="post">
+
+    <!-- Cliente -->
+    <div class="form-group">
+        <label>Cliente:</label>
+        <select name="cliente.id" required>
+            <option value="">Selecione</option>
+            <option th:each="c : ${clientes}"
+                    th:value="${c.id}"
+                    th:text="${c.nomeCliente}">
+            </option>
+        </select>
+    </div>
+
+    <!-- Adicionar item -->
+    <div class="form-group">
+        <label>Produto:</label>
+        <select id="produtoSelect">
+            <option value="">Selecione</option>
+            <option th:each="p : ${produtos}"
+                    th:value="${p.id}"
+                    th:data-preco="${p.preco}"
+                    th:text="${p.nomeProduto}">
+            </option>
+        </select>
+
+        <label>Quantidade:</label>
+        <input type="number" id="quantidade" min="1" value="1">
+
+        <button type="button" onclick="adicionarItem()">Adicionar</button>
+    </div>
+
+    <!-- Tabela de itens -->
+    <table id="tabelaItens">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Qtd</th>
+                <th>Preço</th>
+                <th>Subtotal</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div class="total">
+        Total: R$ <span id="totalVenda">0.00</span>
+    </div>
+
+    <!-- Botão finalizar -->
+    <button type="submit" class="btn btn-finalizar">
+        Finalizar Venda
+    </button>
+
+</form>
+
+<script>
+    let total = 0;
+    let indiceItem = 0;
+
+    function adicionarItem() {
+        const select = document.getElementById("produtoSelect");
+        const quantidade = parseInt(document.getElementById("quantidade").value);
+
+        const produtoId = select.value;
+        const produtoNome = select.options[select.selectedIndex].text;
+        const precoRaw = select.options[select.selectedIndex].dataset.preco;
+        const preco = parseFloat(
+            precoRaw.replace("R$", "").replace(/\s/g, "").replace(".", "").replace(",", ".")
+        );
+
+        if (!produtoId || quantidade <= 0) {
+            alert("Selecione um produto e quantidade válida.");
+            return;
+        }
+
+        const subtotal = preco * quantidade;
+        total += subtotal;
+
+        const tabela = document.getElementById("tabelaItens").getElementsByTagName("tbody")[0];
+        const linha = tabela.insertRow();
+
+        linha.innerHTML = `
+            <td>${produtoNome}</td>
+            <td>${quantidade}</td>
+            <td>${preco.toFixed(2)}</td>
+            <td>${subtotal.toFixed(2)}</td>
+            <td>
+                <button type="button" onclick="removerItem(this, ${subtotal})">
+                    Remover
+                </button>
+            </td>
+            <td style="display:none">
+                <input type="hidden" name="itens[${indiceItem}].produto.id" value="${produtoId}">
+                <input type="hidden" name="itens[${indiceItem}].quantidade" value="${quantidade}">
+                <input type="hidden" name="itens[${indiceItem}].precoUnitario" value="${preco}">
+            </td>
+        `;
+
+        indiceItem++;
+        atualizarTotal();
+    }
+
+    function removerItem(botao, subtotal) {
+        const linha = botao.parentNode.parentNode;
+        linha.remove();
+
+        total -= subtotal;
+        atualizarTotal();
+    }
+
+    function atualizarTotal() {
+        document.getElementById("totalVenda").textContent = total.toFixed(2);
+    }
+</script>
+
+</div>
+    
+</body>
+</html>

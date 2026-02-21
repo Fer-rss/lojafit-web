@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Sistema Loja Fitness</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <div class="logo-area">
+        <img th:src="@{/img/logofit.png}" alt="Logo" class="logo">
+        <div class="logo-text">
+            <h1>Fitness Store</h1>
+            <span>Seu desempenho começa aqui</span>
+        </div>
+    </div>
+
+    <div class="user-area">
+        Usuário: Admin | <a href="#">Sair</a>
+    </div>
+</header>
+
+<!-- CONTAINER PRINCIPAL -->
+<div class="main-container">
+
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
+        <nav>
+            <ul>
+                <li><a th:href="@{/home}">🏠 Home</a></li>
+                <li><a th:href="@{/clientes}">👤 Clientes</a></li>
+                <li><a th:href="@{/fornecedores}">🏭 Fornecedores</a></li>
+                <li><a th:href="@{/produtos}">📦 Produtos</a></li>
+                <li><a th:href="@{/vendas/form}">💰 Vendas</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- CONTEÚDO DINÂMICO -->
+    <main class="content">
+        <div th:replace="${conteudo} :: conteudo"></div>
+    </main>
+
+</div>
+
+<!-- RODAPÉ -->
+<footer class="footer">
+    <p>Contato: contato@fitnessstore.com | (11) 99999-9999</p>
+    <p>© 2026 Fitness Store</p>
+</footer>
+
+<!-- JS principal -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="conteudo">
+    <h2>Lista de Fornecedores</h2>
+
+    <a th:href="@{/fornecedores/novo}" class="btn">+ Novo Fornecedor</a>
+
+    <table class="tabela">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CNPJ</th>
+                <th>Prazo de Entrega</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="fornecedor : ${fornecedores}">
+                <td th:text="${fornecedor.nomeFornecedor}"></td>
+                <td th:text="${T(com.example.lojafit.util.FormatadorUtil).formatarCnpj(fornecedor.cnpj)}"></td>
+                <td th:text="${fornecedor.prazoEntrega}"></td>
+                <td>
+                    <a th:href="@{/fornecedores/editar/{id}(id=${fornecedor.id})}"
+                       class="btn-small">Editar</a>
+                    <a th:href="@{/fornecedores/excluir/{id}(id=${fornecedor.id})}"
+                       class="btn-small danger"
+                       onclick="return confirm('Deseja excluir este fornecedor?');">
+                        Excluir
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

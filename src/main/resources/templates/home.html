@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="conteudo">
+    <h2>Produtos em promoção</h2>
+
+    <!-- Se não houver nenhum produto cadastrado -->
+    <p th:if="${produtos.isEmpty()}" class="sem-produtos">
+        Nenhum produto cadastrado ainda.
+    </p>
+
+    <div class="products" th:unless="${produtos.isEmpty()}">
+        <div class="product-card" th:each="p : ${produtos}">
+            <h3 th:text="${p.nomeProduto}">Nome do Produto</h3>
+            <p th:text="'R$ ' + ${#numbers.formatDecimal(p.preco, 1, 'POINT', 2, 'COMMA')}">
+                R$ 0,00
+            </p>
+            <button>Comprar</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
